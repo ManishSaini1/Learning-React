@@ -2,25 +2,51 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-
-  function Welcome(prop)
-  {
-    return <h1 >{prop.name}</h1>
-  }
-  function App() {
-    return (
+ class Clock extends React.Component
+ {
+   constructor(props)
+   {
+     super(props);
+     this.state={date: new Date() }
+   }
+   
+   componentDidMount()
+   {
+     this.timerID=setInterval(
+       ()=>
+       {
+         this.tick() 
+       },1000
+     )
+      }
+     compnonentWillUnmount()
+     {
+       clearInterval(this.timerID);
+     }
+     tick()
+     {
+       this.setState(
+         {
+           date: new Date()
+         });
+     }
+    //  this.setState={date: Date.now()}
+   
+   render()
+   {
+     return(
       <div>
-        <Welcome name="Sara" />
-        <Welcome name="Cahal" />
-        <Welcome name="Edite" />
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
       </div>
-    );
-  }
-  ReactDOM.render(
+     );
+   }
+  
+ }
 
-    <App />,
-    document.getElementById('root')
-    );
+ ReactDOM.render(
+  <Clock />,
+  document.getElementById('root')
+);
 
 
 // If you want to start measuring performance in your app, pass a function
