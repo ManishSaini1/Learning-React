@@ -2,78 +2,44 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-//  class Clock extends React.Component
-//  {
-//    constructor(props)
-//    {
-//      super(props);
-//      this.state={date: new Date() }
-//    }
-   
-//    componentDidMount()
-//    {
-//      this.timerID=setInterval(
-//        ()=>
-//        {
-//          this.tick() 
-//        },1000
-//      )
-//       }
-//      compnonentWillUnmount()
-//      {
-//        clearInterval(this.timerID);
-//      }
-//      tick()
-//      {
-//        this.setState(
-//          {
-//            date: new Date()
-//          });
-//      }
-//     //  this.setState={date: Date.now()}
-   
-//    render()
-//    {
-//      return(
-//       <div>
-//         <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-//       </div>
-//      );
-//    }
-  
-//  }
-class Toggle extends React.Component
+class NameForm extends React.Component
 {
   constructor(props)
   {
     super(props);
-    this.state=
-    {
-      isToggleOn: true
-    }
-    this.handleClick=this.handleClick.bind(this);
+    this.state={value : ''};
+    
   }
-  handleClick()
+  handleChange= (event)=>
   {
-    this.setState(state=>({
-      isToggleOn : !state.isToggleOn
-    })
-    )
+    console.log(this.state.value,   "Value");
+        this.setState({value: event.target.value});
+  }
+  handleSubmit=(event)=>
+  {
+    event.preventDefault();
+    console.log(this.state.value,"inside the handle...............");
+    window.alert("A name Was Submitted"+ this.state.value);
+    
   }
   render()
   {
-      return(
-        <button onClick={this.handleClick}>
-          {this.state.isToggleOn ? "Yes"  : "NO"}
-        </button>
-      )
+    return(
+    
+      <form onSubmit={this.handleSubmit}>
+        <label>Name:</label>
+        <input type="text" value={this.state.value} onChange={this.handleChange}></input>
+        <input type="submit" value="Submit"></input>
+      </form>
+    )
   }
 }
 
  ReactDOM.render(
   // <Clock />,
-  <Toggle/>,
-  document.getElementById('root')
+  // <Toggle/>,
+  <NameForm/>,
+    document.getElementById('root')
 );
 
 
